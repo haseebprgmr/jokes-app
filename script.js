@@ -1,3 +1,6 @@
+// Giphy API Key (replace with your own API key)
+const GIPHY_API_KEY = "AIzaSyB2dXadXR_aHSdOhsqYYWqi0TWEZb9RkjY";
+
 // Function to fetch a joke from the JokeAPI
 async function fetchJoke(mood, situation) {
   const jokeText = document.getElementById("joke-text");
@@ -40,6 +43,46 @@ async function fetchJoke(mood, situation) {
   }
 }
 
+// Function to fetch a meme from Giphy based on mood
+async function fetchMeme(mood) {
+  const memeContainer = document.getElementById("meme-container");
+
+  // Map mood to Giphy search terms
+  const moodMap = {
+    happy: "happy meme",
+    sad: "sad meme",
+    angry: "angry meme",
+    silly: "silly meme",
+    excited: "excited meme",
+  };
+
+  // Get the search term based on the selected mood
+  const searchTerm = moodMap[mood] || "funny meme";
+
+  // Construct the Giphy API URL
+  const url = `https://api.giphy.com/v1/gifs/search?api_key=${GIPHY_API_KEY}&q=${encodeURIComponent(
+    searchTerm
+  )}&limit=1`;
+
+  try {
+    // Fetch meme from the API
+    const response = await fetch(url);
+    const data = await response.json();
+
+    // Check if a meme is available
+    if (data.data.length > 0) {
+      const memeUrl = data.data[0].images.fixed_height.url;
+      memeContainer.innerHTML = `<img src="${memeUrl}" alt="${searchTerm}" class="meme-image">`;
+    } else {
+      memeContainer.innerHTML = "<p>No meme found. Try again!</p>";
+    }
+  } catch (error) {
+    // Handle errors (e.g., network issues)
+    memeContainer.innerHTML = "<p>Failed to fetch a meme. Please check your connection.</p>";
+    console.error(error);
+  }
+}
+
 // Event listener for the "Generate Joke" button
 document.getElementById("generate-joke").addEventListener("click", () => {
   // Get the selected mood and situation
@@ -48,4 +91,7 @@ document.getElementById("generate-joke").addEventListener("click", () => {
 
   // Fetch and display a joke
   fetchJoke(mood, situation);
+
+  // Fetch and display a meme
+  fetchMeme(mood);
 });
