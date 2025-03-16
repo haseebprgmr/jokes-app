@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mood Joke Generator</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Mood Joke Generator</h1>
+    <p>Select your mood and get a joke tailored just for you!</p>
+
+    <!-- Mood Selection -->
+    <div class="mood-selector">
+      <label for="mood">Choose your mood:</label>
+      <select id="mood">
+        <option value="happy">Happy</option>
+        <option value="sad">Sad</option>
+        <option value="angry">Angry</option>
+        <option value="silly">Silly</option>
+        <option value="excited">Excited</option>
+      </select>
+    </div>
+
+    <!-- Situation Input -->
+    <div class="situation-input">
+      <label for="situation">Enter a situation (optional):</label>
+      <input type="text" id="situation" placeholder="e.g., at work, with friends">
+    </div>
+
+    <!-- Generate Joke Button -->
+    <button id="generate-joke">Generate Joke</button>
+
+    <!-- Joke Display -->
+    <div class="joke-display">
+      <h2>Your Joke:</h2>
+      <p id="joke-text">...</p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
