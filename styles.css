@@ -60,7 +60,7 @@ button:hover {
   background-color: #ff4a3d;
 }
 
-.joke-display {
+.joke-display, .meme-display {
   margin-top: 2rem;
 }
 
@@ -68,4 +68,10 @@ button:hover {
   font-size: 1.2rem;
   color: #555;
   font-style: italic;
+}
+
+.meme-image {
+  max-width: 100%;
+  border-radius: 10px;
+  margin-top: 1rem;
 }
