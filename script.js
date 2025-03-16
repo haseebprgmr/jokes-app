@@ -1,5 +1,5 @@
-// Giphy API Key (replace with your own API key)
-const GIPHY_API_KEY = "AIzaSyB2dXadXR_aHSdOhsqYYWqi0TWEZb9RkjY";
+// Tenor API Key (replace with your own API key)
+const TENOR_API_KEY = "AIzaSyB2dXadXR_aHSdOhsqYYWqi0TWEZb9RkjY";
 
 // Function to fetch a joke from the JokeAPI
 async function fetchJoke(mood, situation) {
@@ -43,11 +43,11 @@ async function fetchJoke(mood, situation) {
   }
 }
 
-// Function to fetch a meme from Giphy based on mood
+// Function to fetch a meme from Tenor based on mood
 async function fetchMeme(mood) {
   const memeContainer = document.getElementById("meme-container");
 
-  // Map mood to Giphy search terms
+  // Map mood to Tenor search terms
   const moodMap = {
     happy: "happy meme",
     sad: "sad meme",
@@ -59,10 +59,10 @@ async function fetchMeme(mood) {
   // Get the search term based on the selected mood
   const searchTerm = moodMap[mood] || "funny meme";
 
-  // Construct the Giphy API URL
-  const url = `https://tenor.googleapis.com/v2/search?api_key=${GIPHY_API_KEY}&q=${encodeURIComponent(
+  // Construct the Tenor API URL
+  const url = `https://tenor.googleapis.com/v2/search?q=${encodeURIComponent(
     searchTerm
-  )}&limit=1`;
+  )}&key=${TENOR_API_KEY}&limit=1`;
 
   try {
     // Fetch meme from the API
@@ -70,8 +70,8 @@ async function fetchMeme(mood) {
     const data = await response.json();
 
     // Check if a meme is available
-    if (data.data.length > 0) {
-      const memeUrl = data.data[0].images.fixed_height.url;
+    if (data.results.length > 0) {
+      const memeUrl = data.results[0].media_formats.gif.url;
       memeContainer.innerHTML = `<img src="${memeUrl}" alt="${searchTerm}" class="meme-image">`;
     } else {
       memeContainer.innerHTML = "<p>No meme found. Try again!</p>";
