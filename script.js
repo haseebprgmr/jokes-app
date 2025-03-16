@@ -60,7 +60,7 @@ async function fetchMeme(mood) {
   const searchTerm = moodMap[mood] || "funny meme";
 
   // Construct the Giphy API URL
-  const url = `https://api.giphy.com/v1/gifs/search?api_key=${GIPHY_API_KEY}&q=${encodeURIComponent(
+  const url = `https://tenor.googleapis.com/v2/search?api_key=${GIPHY_API_KEY}&q=${encodeURIComponent(
     searchTerm
   )}&limit=1`;
 
