@@ -54,7 +54,7 @@ async function fetchRandomMeme() {
   // Construct the Tenor API URL to fetch 1 random meme
   const url = `https://tenor.googleapis.com/v2/search?q=${encodeURIComponent(
     randomTerm
-  )}&key=${TENOR_API_KEY}&limit=1`;
+  )}&key=${TENOR_API_KEY}&limit=3`;
 
   try {
     // Fetch meme from the API
