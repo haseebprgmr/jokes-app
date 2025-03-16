@@ -62,7 +62,7 @@ async function fetchMeme(mood) {
   // Construct the Tenor API URL
   const url = `https://tenor.googleapis.com/v2/search?q=${encodeURIComponent(
     searchTerm
-  )}&key=${TENOR_API_KEY}&limit=1`;
+  )}&key=${TENOR_API_KEY}&limit=10`;
 
   try {
     // Fetch meme from the API
