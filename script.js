@@ -10,7 +10,7 @@ async function fetchJoke(mood, situation) {
     happy: "Any",
     sad: "Miscellaneous",
     angry: "Pun",
-    silly: "Programming",
+    silly: "Any",
     excited: "Dark",
   };
 
@@ -43,36 +43,31 @@ async function fetchJoke(mood, situation) {
   }
 }
 
-// Function to fetch a meme from Tenor based on mood
-async function fetchMeme(mood) {
+// Function to fetch a random meme from Tenor
+async function fetchRandomMeme() {
   const memeContainer = document.getElementById("meme-container");
 
-  // Map mood to Tenor search terms
-  const moodMap = {
-    happy: "happy meme",
-    sad: "sad meme",
-    angry: "angry meme",
-    silly: "silly meme",
-    excited: "excited meme",
-  };
+  // Random search terms for variety
+  const searchTerms = ["funny meme", "random meme", "hilarious meme", "reaction meme"];
+  const randomTerm = searchTerms[Math.floor(Math.random() * searchTerms.length)];
 
-  // Get the search term based on the selected mood
-  const searchTerm = moodMap[mood] || "funny meme";
-
-  // Construct the Tenor API URL
+  // Construct the Tenor API URL to fetch 1 random meme
   const url = `https://tenor.googleapis.com/v2/search?q=${encodeURIComponent(
-    searchTerm
-  )}&key=${TENOR_API_KEY}&limit=10`;
+    randomTerm
+  )}&key=${TENOR_API_KEY}&limit=1`;
 
   try {
     // Fetch meme from the API
     const response = await fetch(url);
     const data = await response.json();
 
+    // Clear previous meme
+    memeContainer.innerHTML = "";
+
     // Check if a meme is available
     if (data.results.length > 0) {
       const memeUrl = data.results[0].media_formats.gif.url;
-      memeContainer.innerHTML = `<img src="${memeUrl}" alt="${searchTerm}" class="meme-image">`;
+      memeContainer.innerHTML = `<img src="${memeUrl}" alt="${randomTerm}" class="meme-image">`;
     } else {
       memeContainer.innerHTML = "<p>No meme found. Try again!</p>";
     }
@@ -92,6 +87,6 @@ document.getElementById("generate-joke").addEventListener("click", () => {
   // Fetch and display a joke
   fetchJoke(mood, situation);
 
-  // Fetch and display a meme
-  fetchMeme(mood);
+  // Fetch and display a random meme
+  fetchRandomMeme();
 });
